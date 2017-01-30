@@ -10,12 +10,25 @@
 
      .input-group{
          width:100%;
-         padding:15px 40px;
+         padding:15px 45px;
      }
 
      center{
-
+         background-color:lightblue;
+         border-radius:10px;
+         margin-right:30%;
+         margin-left:30%;
+         padding-top:5px;
      }
+
+     body{
+         background-image:url({% static "reg1.jpg" %});
+         background-size:cover;
+         background-position:top center !important;
+         background-repeat:no-repeat !important;
+         background-attachment:fixed;
+     }
+
     </style>
 
     <body>
@@ -33,6 +46,7 @@
             {% else %}
 
             <center>
+                <h3> Register </h3>
 
                 <form id="user_form" method="post" action="" enctype="multipart/form-data">
 
