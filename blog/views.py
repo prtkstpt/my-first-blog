@@ -1,7 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, UserForm, UserLoginForm
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import (authenticate, login, logout, get_user_model,)
+from django.template import RequestContext
 
 def post_list(request):
     #posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -40,3 +45,47 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form':form})
+
+def register(request):
+    context = RequestContext(request)
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+
+        if user_form.is_valid():
+            user=user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            registered = True
+        else:
+            print (user_form.errors)
+    else:
+        user_form = UserForm()
+    return render(request,'blog/home.html',{'user_form':user_form, 'registered':registered}) 
+#    return render_to_response('blog/register.html',{'user_form':user_form, 'registered':registered},context)
+            
+                
+def user_login(request):
+    print(request.user.is_authenticated())
+    title = "Login"
+    form = UserLoginForm(request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user =authenticate(username=username,password=password)
+        login(request, user)
+        print(request.user.is_authenticated())
+        return HttpResponseRedirect('post/')
+    return render(request,'blog/home.html',{'form':form,'title':title})
+
+#def logout_view(request):
+#    return render(request, 'blog/logout.html',{})
+
+
+def home(request):
+    if request.user.is_authenticated:
+        template = "blog/home.html"
+    else:
+        template = "blog/home.html"
+    return render(request, template)
