@@ -26,6 +26,7 @@ SECRET_KEY = '@ywae!%z936i9e-@)jct5hwv@*ahfnikn(whv2*7z-tcvg1vwb'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+LOGIN_URL="/"
 
 # Application definition
 

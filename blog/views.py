@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import (authenticate, login, logout, get_user_model,)
 from django.template import RequestContext
+from mysite import settings
 
 def post_list(request):
     #posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -68,6 +69,9 @@ def register(request):
                 
 def user_login(request):
     print(request.user.is_authenticated())
+    if request.user.is_active:
+        login(request,request.user)
+        return HttpResponseRedirect('post/')
     title = "Login"
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
@@ -79,13 +83,16 @@ def user_login(request):
         return HttpResponseRedirect('post/')
     return render(request,'blog/login.html',{'form':form,'title':title})
 
-#def logout_view(request):
-#    return render(request, 'blog/logout.html',{})
+#@login_required
+def user_logout(request):
+    logout(request)
+    print("logged out")
+    return HttpResponseRedirect(settings.LOGIN_URL) 
 
 
-def home(request):
-    if request.user.is_authenticated:
-        template = "blog/home.html"
-    else:
-        template = "blog/home.html"
-    return render(request, template)
+# def home(request):
+#     if request.user.is_authenticated:
+#         template = "blog/home.html"
+#     else:
+#         template = "blog/home.html"
+#     return render(request, template)

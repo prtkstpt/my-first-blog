@@ -1,51 +1,72 @@
 {% load staticfiles %}
-<html>
-    <head>
-        <title>My Blog</title>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title> Login </title>
 
-        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 
-        <style>
-         body{
-             background-image:url({% static "blog1.jpg" %});
-             background-size:cover;
-             background-position:top center !important;
-             background-repeat:no-repeat !important;
-             background-attachment:fixed;
-         }
+      <style type="text/css">
 
-         center{
-             border-radius:20px;
-             background-color:lightgray;
-             margin:10% 40%;
-             padding:5px;
+       input:required:invalid, input:focus:invalid {
+              background-image:url({% static "images/invalid.png" %});
+           background-position: right center;
+              background-repeat: no-repeat;
+          }
+       input:required:valid {
+              background-image:url({% static "images/valid.png" %});
+              background-position: right center;
+              background-repeat: no-repeat;
+          }
 
-         }
+      </style>
+</head>
 
-         input{
-             padding:15px;
-         }
+<body>
 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6">
+                <img src="{% static 'images/bl1.png' %}"/>
+                <img src="{% static 'images/myblog.png' %}"/>
 
-         iframe{
-             border-radius:25px;
+            </div>
 
-         }
+            <div class="col-xs-6" style="margin-top:75px;padding-left:20%">
+                <span style="color:black;font-size:15px;font-weight:bold;font-family:Courier New"> Follow me : </span> <a href="http://www.facebook.com/pratik.satpute.50"><img style="padding-left:10px" src="{% static 'images/facebook.png' %}"></a><a href="http://twitter.com/prtkstpt/"><img style="padding-left:10px" src="{% static 'images/twitter.png' %}"></a><a href="https://in.linkedin.com/in/pratik-satpute-4748a4110"><img  style="padding-left:10px" src="{% static 'images/linkedin.png' %}"></a><a href="http://www.instagram.com/prtkstpt/"><img style="padding-left:10px" src="{% static 'images/instagram.png' %}"></a>
+            </div>
+        </div>
 
-        </style>
+        <div class="row">
+            <div class="col-xs-8">
+                <img src="{% static 'blog1.jpg' %}"/>
+            </div>
 
-    </head>
+            <div class="col-xs-4">
+        <div class="form">
+            <div class="thumbnail">
+                <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/hat.svg"/> -->
 
-    <body>
-        <h3>If you are not Registered , Please register here :
-            <a href="/register">Register</a></h3>
-        <center><h1>Login</h1>
-            <form id="form" method="post" action="/">
+                <img src="{% static 'images/login1.png' %}">
+            </div>
+
+            <form id="form" class="login-form" method="post">
                 {% csrf_token %}
+                <input id="username" type="text" placeholder="username" name="username" required="required"/>
+                <input id="password" type="password" placeholder="password" name="password" required="required"/>
+                <input style="color:lightgreen" type="submit" name="Login" value="Login"/>
+                <!-- <div class="" style="position:absolute; left:100%">{{ form.username.errors }}
+                     </div> -->
+                <p class="message">Not registered? <a href="/register">Create an account</a></p>
+            </form>
+        </div>
+        </div>
+        </div>
+    </div>
 
-                {{ form.as_p }}
-                <input type="submit" name="submit" value="Login"/>
-            </form></center>
+    <script src="{% static 'js/index.js' %}"></script>
 
-    </body>
+
+</body>
 </html>
