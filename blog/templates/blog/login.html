@@ -17,14 +17,26 @@ body{
   background-repeat: no-repeat !important;
   background-attachment: fixed;
       }
-      </style>
 
+  input:required:invalid, input:focus:invalid {
+    background-image:url({% static "images/invalid.png" %});
+    background-position: right center;
+    background-repeat: no-repeat;
+    }
+    input:required:valid {
+    background-image:url({% static "images/valid.png" %});
+    background-position: right center;
+    background-repeat: no-repeat;
+    }
+
+</style>
 </head>
 
 <body>
 
     <div class="container-fluid">
         <div class="row">
+
             <div class="col-xs-4">
                 <!-- <img src="{% static 'images/bl1.png' %}"/> -->
                 <img style="margin-top:20px" src="{% static 'images/myblog.png' %}"/>
@@ -39,30 +51,25 @@ body{
             </div>
         </div>
 
-        <!-- <div class="row">
-             <div class="col-xs-8">
-             <img src="{% static 'blog1.jpg' %}"/>
-             </div>
 
-             <div class="col-xs-4"> -->
-        <div class="form">
-            <div class="thumbnail">
+            <div class="form">
+                <div class="thumbnail">
                 <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/hat.svg"/> -->
+                    <img src="{% static 'images/login1.png' %}">
+                </div>
 
-                <img src="{% static 'images/login1.png' %}">
-            </div>
+                <form id="form" class="login-form" method="post">
+                    {% csrf_token %}
+                    <input id="username" type="text" placeholder="username" name="username" required="required"/>
+                    <input id="password" type="password" placeholder="password" name="password" required="required"/>
+                    <input class="btn btn-primary" style="background-color:skyblue;border-radius:10px" type="submit" name="Login" value="Login"/>
 
-            <form id="form" class="login-form" method="post">
-                {% csrf_token %}
-                <input id="username" type="text" placeholder="username" name="username" required="required"/>
-                <input id="password" type="password" placeholder="password" name="password" required="required"/>
-                <input class="btn btn-primary" style="background-color:skyblue;border-radius:10px" type="submit" name="Login" value="Login"/>
                 <!-- <div class="" style="position:absolute; left:100%">{{ form.username.errors }}
                      </div> -->
-                <p class="message">Not registered? <a href="/register">Create an account</a></p>
-            </form>
+                    <p class="message">Not registered? <a href="/register">Create an account</a></p>
+                </form>
             <!-- </div> -->
-        </div>
+            </div>
     </div>
 
 

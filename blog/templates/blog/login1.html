@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<<<<<<< HEAD
 <html >
 <head>
   <meta charset="UTF-8">
@@ -53,4 +54,61 @@
     <script src="{% static 'js/index.js' %}"></script>
 
 </body>
+=======
+<html>
+    <head>
+        <title>My Blog</title>
+
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+        <style>
+         body{
+             /* background-image:url({% static "" %}); */
+             background-size:cover;
+             background-position:top center !important;
+             background-repeat:no-repeat !important;
+             background-attachment:fixed;
+         }
+
+         center{
+             border-radius:20px;
+             background-color:lightgray;
+             margin:10% 40%;
+             padding:5px;
+
+         }
+
+         input{
+             padding:15px;
+         }
+
+
+         iframe{
+             border-radius:25px;
+
+         }
+
+        </style>
+
+    </head>
+
+    <body>
+        <h3>If you are not Registered , Please
+            <a href="/register"> Register here.</a></h3>
+
+        <div class="">
+
+
+
+
+        <!--
+             <center><h1>Login</h1>
+             <form id="form" method="post" action="/">
+             {% csrf_token %}
+
+             {{ form.as_p }}
+             <input type="submit" name="submit" value="Login"/>
+             </form></center>  -->
+    </body>
+>>>>>>> c2dc20137ebd66c83b4f98f1f898947270580cf8
 </html>
