@@ -13,8 +13,11 @@
         {% if user.is_authenticated %}
         <h4 style="text-align:right;color:white">Welcome {{ user.username }} !</h4>
         <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-        <a href="{% url 'logout' %}">Logout</a>
+        <!-- <a href="{% url 'logout' %}">Logout</a> -->
 
+            <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+            </a>
 
         {% else %}
         <h2 style="text-align:right"> <a href="{% url 'register' %}" style="color:green">Register</a></h2>

@@ -50,6 +50,7 @@ def post_edit(request, pk):
 def register(request):
     context = RequestContext(request)
     registered = False
+
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
 
@@ -57,18 +58,19 @@ def register(request):
             user=user_form.save()
             user.set_password(user.password)
             user.save()
-
+            
             registered = True
         else:
             print (user_form.errors)
     else:
         user_form = UserForm()
     return render(request,'blog/register.html',{'user_form':user_form, 'registered':registered}) 
-#    return render_to_response('blog/register.html',{'user_form':user_form, 'registered':registered},context)
-            
-                
+    #    return render_to_response('blog/register.html',{'user_form':user_form, 'registered':registered},context)
+    
+    
 def user_login(request):
     print(request.user.is_authenticated())
+   
     if request.user.is_active:
         login(request,request.user)
         return HttpResponseRedirect('post/')
@@ -80,8 +82,10 @@ def user_login(request):
         user =authenticate(username=username,password=password)
         login(request, user)
         print(request.user.is_authenticated())
+        print(user)
         return HttpResponseRedirect('post/')
-    return render(request,'blog/login.html',{'form':form,'title':title})
+    
+    return render(request,'blog/login.html',{'form':form,'title':title,})
 
 #@login_required
 def user_logout(request):

@@ -1,12 +1,105 @@
-{% extends 'blog/base.html' %}
-{% block title %} Register {% endblock %}
-{% block content %}
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Pratik's Blog</title>
 
-<h2> Registraion </h2>
-<form method="post">
-  {% csrf_token %}
-  {{ from.as_p }}
-  <input type="submit" value="Register" />
-</form>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    </head>
 
-{% endblock %}
+    <style>
+
+     .input-group{
+         width:100%;
+         padding:15px 45px;
+     }
+
+     center{
+       /*  background-color:rgba(0, 0, 0, .25);*/
+       /*  border-radius:10px;*/
+       /*  margin-right:30%;*/
+         margin-left:20%;
+         padding-top:200px;
+     }
+
+     body{
+         background-image:url({% static "reg.jpg" %});
+         background-size:cover;
+         background-position:top center !important;
+         background-repeat:no-repeat !important;
+         background-attachment:fixed;
+     }
+    </style>
+
+    <body>
+
+        {% if registered %}
+        <script type="text/javascript">
+
+             alert ("Please OK to Continue.");
+                 window.location="/";
+
+            </script>
+       <!-- <h1><strong> Thank you for registering ! </strong><h1><br/>-->
+           <!-- <a href="http://127.0.0.1:8000/">Return to the homepage.</a><br />-->
+
+            {% else %}
+
+            <center>
+                <!-- <h3> Register </h3> -->
+
+                <form id="user_form" method="post" action="" enctype="multipart/form-data">
+
+               {% csrf_token %}
+
+              <table  cellspacing="10" cellpadding="5">
+
+                  <tr>
+                      <td colspan="1">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                              <input id="username" type="text" class="form-control" name="username" placeholder="Username" required="required">
+                          </div>
+                      </td>
+                      <td>
+                          <strong style="color:red">{{user_form.username.errors}}</strong>
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td colspan="1">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                              <input id="email" type="text" class="form-control" name="email" placeholder="Email" required="required">
+                          </div>
+                      </td>
+                       <td>
+                          <strong style="color:red">{{user_form.email.errors}}</strong>
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td colspan="1">
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                              <input id="password" type="password" class="form-control" name="password" placeholder="Password" required="required">
+                          </div>
+                      </td>
+                       <td>
+                           <strong style="color:red">{{user_form.password.errors}}</strong>
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td style="padding-left:40%">
+                           <input type="submit" class="btn btn-primary" name="Register" value="Register" />
+                      </td>
+                  </tr>
+              </table>
+
+                </form>
+
+            </center>
+
+           {% endif %}
+    </body>
+</html>

@@ -1,12 +1,7 @@
 {% load staticfiles %}
 /* Form */
 .form {
-  position: relative;
-  z-index: 1;
-  background:rgba(0, 0, 0, .25);
-  max-width: 300px;
-  margin: 100 auto 100px;
-  background:lightgray;
+  background: rgba(0, 0, 0, .5);
   max-width: 300px;
   margin: 50 auto 100px;
   padding: 30px;
@@ -16,6 +11,7 @@
   border-bottom-right-radius: 20px;
   text-align: center;
 }
+
 .form .thumbnail {
   background: #007bff;
   width: 150px;
