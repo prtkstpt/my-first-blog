@@ -91,8 +91,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     print("logged out")
-    return HttpResponseRedirect(settings.LOGIN_URL) 
-
+    return HttpResponseRedirect(settings.LOGIN_URL)
 
 # def home(request):
 #     if request.user.is_authenticated:
