@@ -1,2 +1,1 @@
-web: gunicorn gettingstarted.wsgi --log-file -
-
+WSGI_APPLICATION = 'mysite.wsgi.application'
